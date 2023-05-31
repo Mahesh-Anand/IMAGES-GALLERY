@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import ImageCard from "./components/ImageCard";
+import Welcome from "./components/Welcome";
 // import ImageCardWithError from "./components/ImageCardWithError";
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -46,7 +47,9 @@ const handleDeleteImage= (id)=>{
       {/* {!!images.length && <ImageCard image = {images[0]}/>}
       {images.length >1  && <ImageCard image = {images[1]}/>} */}
       <Container className ="mt-4">
-        <Row xs={1} md={2} lg={3}> {/* for adaptive nature on different screen */}
+
+        {/* javasript code  below*/}
+        {images.length? (<Row xs={1} md={2} lg={3}> {/* for adaptive nature on different screen */}
           {images.map(
             (
               image,
@@ -58,8 +61,9 @@ const handleDeleteImage= (id)=>{
               </Col>
               // <ImageCardWithError key ={i} image = {image}/>
             )
-          )}
-        </Row>
+          )} 
+        </Row>):(<Welcome/>)}
+        
       </Container>
       {/* here {} means js script and !! to convert images.length to boolean so it is not shown */}
     </div>
