@@ -7,7 +7,11 @@ import Welcome from "./components/Welcome";
 // import ImageCardWithError from "./components/ImageCardWithError";
 import { Container, Row, Col } from "react-bootstrap";
 
-const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY;
+
+
+// const UNSPLASH_KEY = process.env.REACT_APP_UNSPLASH_KEY; # we dont need this any more
+const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050'  //5050 of python 
+
 function App() {
   const [word, setWord] = useState("");
   const [images, setImages] = useState([]);
@@ -19,7 +23,8 @@ function App() {
 
     console.log(word);
     fetch(
-      `https://api.unsplash.com/photos/random/?query=${word}&client_id=${UNSPLASH_KEY}`
+      `${API_URL}/new-image?query=${word}`
+      // `https://api.unsplash.com/photos/random/?query=${word}&client_id=${UNSPLASH_KEY}`
     )
       .then((res) => res.json())
       .then((data) => {

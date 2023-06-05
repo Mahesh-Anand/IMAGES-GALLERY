@@ -3,6 +3,7 @@ import os
 import requests
 from flask import Flask, request
 from dotenv import load_dotenv 
+from flask_cors import CORS
 
 load_dotenv(dotenv_path = "./.env.local") # to load unsplash key from given path
 # print(os.environ.get("UNSPLASH_KEY",""))   # other way to get unsplash key
@@ -17,6 +18,8 @@ if not UNSPLASH_KEY:    # or UNSPLASH KEY==""
 
 
 app = Flask(__name__)
+
+CORS(app)
 
 app.config["DEBUG"]= DEBUG
 
