@@ -1,15 +1,19 @@
 version: '3'
+
+      # docker exec -it images-gallery-mongo-1 mongosh -u root -p very-strong-db-password
+      # not mongo 
 services:
   frontend:
     build: ./frontend # our frontend file
     
     ports: 
       - "3000:3000"
-    volumes:
+    volumes: #means mapping here
       - /app/node_modules   #to ignore node_modules folder while mapping
       - ./frontend:/app 
     environment:
       - CHOKIDAR_USEPOLLING=true
+    restart: always
     
   api:
     build: ./api # our frontend file
@@ -17,3 +21,29 @@ services:
       - "5050:5050"
     volumes:
       - ./api:/app 
+    restart: always
+  
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: very-strong-db-password
+    volumes:
+      - mongodb_data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: very-strong-db-password
+      # ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    depends_on:
+      - mongo
+
+volumes:
+  mongodb_data:
