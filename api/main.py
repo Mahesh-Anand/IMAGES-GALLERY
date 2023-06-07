@@ -4,6 +4,7 @@ import requests
 from flask import Flask, request
 from dotenv import load_dotenv 
 from flask_cors import CORS
+from collections.abc import Mapping, MutableMapping
 
 load_dotenv(dotenv_path = "./.env.local") # to load unsplash key from given path
 # print(os.environ.get("UNSPLASH_KEY",""))   # other way to get unsplash key
