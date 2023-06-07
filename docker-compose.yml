@@ -1,0 +1,10 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend # our frontend file
+    ports: 
+      - "3000:3000"
+  api:
+    build: ./api # our frontend file
+    ports: 
+      - "5050:5050"
